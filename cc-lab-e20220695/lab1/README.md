@@ -6,6 +6,10 @@
 
 **CHHEANG HOKLENG**
 
+<p><strong>Student ID:</strong> e20220695<br/>
+<strong>Learner Lab user name:</strong> CHHEANG_HOKLENG<br/>
+<strong>Date completed:</strong> 22 October 2026</p>
+
 </div>
 
 ## Table of Contents
@@ -36,7 +40,7 @@
 
 ## 1. Overview
 
-This report documents **Cloud Lab 1** (Amazon EC2 walkthrough and challenge) completed in **AWS Academy Learner Lab**, region **US East (N. Virginia) `us-east-1`**.
+This report documents **Cloud Lab 1** (Amazon EC2 walkthrough and challenge) completed in **AWS Academy Learner Lab** (user **CHHEANG_HOKLENG**), region **US East (N. Virginia) `us-east-1`**, on **22 October 2026**.
 
 ---
 
