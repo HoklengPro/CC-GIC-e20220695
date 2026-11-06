@@ -2,7 +2,11 @@
 
 **Course:** ITC-I5GIC-CC (Cloud Computing)  
 **Region:** `us-east-1` (US East N. Virginia)  
-**Learner Lab user:** CHHEANG_HOKLENG  
+
+- **Student name:** CHHEANG HOKLENG  
+- **Student ID:** e20220695  
+- **Learner Lab user name:** CHHEANG_HOKLENG  
+- **Date completed:** 05 November 2026  
 
 ## What this lab demonstrates
 
