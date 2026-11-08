@@ -10,7 +10,8 @@
 
 ## What this lab demonstrates
 
-**FruitsAPI** on API Gateway integrates **directly** with DynamoDB table **Fruits**. A **PUT-only** S3-style flow is replaced here by **POST /fruit** and **GET /fruit/{name}**; uploads in CloudShell call the deployed **v1** Invoke URL.
+**FruitsAPI** on API Gateway integrates **directly** with DynamoDB table **Fruits** (no Lambda).  
+**POST /fruit** adds items; **GET /fruit/{name}** reads one fruit when query parameter **color** is supplied.
 
 ---
 
