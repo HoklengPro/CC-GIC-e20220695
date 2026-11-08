@@ -6,7 +6,11 @@
 - **Student name:** CHHEANG HOKLENG  
 - **Student ID:** e20220695  
 - **Learner Lab user name:** CHHEANG_HOKLENG  
-- **Date completed:** 2026-11-08
+- **Date completed:** 2026-11-09
+
+## What this lab demonstrates
+
+**FruitsAPI** on API Gateway integrates **directly** with DynamoDB table **Fruits**. A **PUT-only** S3-style flow is replaced here by **POST /fruit** and **GET /fruit/{name}**; uploads in CloudShell call the deployed **v1** Invoke URL.
 
 ---
 
@@ -14,29 +18,50 @@
 
 ![Fruits table](images/01-dynamodb-table.png)
 
+Table **Fruits** uses composite primary key **Name** (partition) and **Color** (sort), on-demand capacity, status **Active**.  
+No `Flavor` column is defined on the table schema; that attribute is added per item when data is written.
+
 ## 2. Table items
 
 ![Items in the Fruits table](images/02-dynamodb-items.png)
+
+**Explore table items** shows four rows after seed data and **add_fruit.py**: Apple (Red and Green), Lemon, and **Grapes**.  
+Each item has **Name**, **Color**, and **Flavor**, matching the keys used by **GetItem** and **PutItem**.
 
 ## 3. REST API resources
 
 ![API resources and methods](images/03-api-resources.png)
 
+**FruitsAPI** resources: **POST** on `/fruit` and **GET** on `/fruit/{name}` with path parameter **name**.  
+Both methods use **AWS service** integrations to DynamoDB (no Lambda in this lab).
+
 ## 4. GET mapping template
 
 ![GET mapping template](images/04-get-mapping-template.png)
+
+**Integration request** for GET builds a **GetItem** JSON body: **TableName** `Fruits` and **Key** from **`$input.params('name')`** and **`$input.params('color')`**.  
+The client calls HTTP GET, but API Gateway forwards **POST** to the DynamoDB **GetItem** action with this template.
 
 ## 5. POST /fruit
 
 ![POST request](images/05-post-request.png)
 
+In **CloudShell**, **`python3 add_fruit.py`** sends JSON **`Grapes` / Green / Sour** to **POST /fruit**; the first response is often **`{}`** (successful **PutItem**).  
+The script then **GET**s the same fruit and prints the item JSON returned from the API.
+
 ## 6. GET /fruit/{name}
 
 ![GET request](images/06-get-request.png)
 
+**`python3 get_fruit.py`** calls **GET /fruit/Apple?color=Red** against stage **v1**.  
+The printed **Item** shows **Apple**, **Red**, and **Sweet** in DynamoDB attribute format.
+
 ## 7. Stage and Invoke URL
 
 ![Stage v1](images/07-stage.png)
+
+Stage **v1** is deployed for **FruitsAPI**; the **Invoke URL** is the base for **`get_fruit.py`** and **`add_fruit.py`**.  
+After API changes, you must **Deploy API** to **v1** again before the URL serves the latest configuration.
 
 ## Scripts
 
@@ -44,7 +69,7 @@
 - [get_fruit.py](get_fruit.py)
 - [add_fruit.py](add_fruit.py)
 
-**Invoke URL used in scripts:** `https://5cwwbnwbhc.execute-api.us-east-1.amazonaws.com/v1` (replace in CloudShell if you redeploy.)
+**Invoke URL in scripts:** `https://5cwwbnwbhc.execute-api.us-east-1.amazonaws.com/v1`
 
 ---
 
@@ -58,7 +83,7 @@
 
 ## Problems and how I solved them (optional)
 
-- Ran **`populate_table.py`** in **CloudShell** (boto3 available there). Test scripts need **`pip3 install --user requests`** in CloudShell if needed.
+- In CloudShell, **`pip3 install requests`** (without `--user`) when the virtualenv rejected **`--user`**.
 
 ## Clean up
 
